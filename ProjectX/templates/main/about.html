@@ -1,0 +1,51 @@
+
+{% extends 'main/layout.html' %}
+{%load static%}
+{% block title %}About{% endblock %}
+{%block css%}
+<link rel="stylesheet" href="{%static 'main/css/О-нас.css'%}" media="screen">
+{%endblock%}
+{% block head %}
+        <section class="u-clearfix u-custom-color-2 u-section-1" id="sec-c2d0">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h4 class="u-text u-text-default u-text-1">О нас</h4>
+        <p class="u-text u-text-default u-text-2">Мы представляем площадку для студентов и преподавателей для репетиторских услуг по математике.<br>Наша команда:
+        </p>
+        <div class="u-list u-list-1">
+          <div class="u-repeater u-repeater-1">
+            <div class="u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-default u-image-1" src="{%static 'main/img/qrEsH0A3Q00.jpg'%}" alt="" data-image-width="1620" data-image-height="2160">
+                <p class="u-small-text u-text u-text-variant u-text-3">Евсиков Кирилл наш тестировщик и маркетолог</p>
+              </div>
+            </div>
+            <div class="u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-2">
+                <img class="u-image u-image-default u-image-2" src="{%static 'main/img/photo_2023-11-30_17-05-49.jpg'%}" alt="" data-image-width="184" data-image-height="203">
+                <p class="u-small-text u-text u-text-variant u-text-4">Лепешов Никита наш менеджер по продажам</p>
+              </div>
+            </div>
+            <div class="u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-3">
+                <img class="u-image u-image-default u-image-3" src="{%static 'main/img/photo_2023-11-30_17-05-23.jpg'%}" alt="" data-image-width="212" data-image-height="306">
+                <p class="u-small-text u-text u-text-variant u-text-5">Дронов Владимир наш инвестор</p>
+              </div>
+            </div>
+            <div class="u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-4">
+                <img class="u-image u-image-default u-image-4" src="{%static 'main/img/photo_2023-12-05_14-23-01.jpg'%}" alt="" data-image-width="958" data-image-height="1280">
+                <p class="u-small-text u-text u-text-variant u-text-6">Яровой Кирилл наш разработчик</p>
+              </div>
+            </div>
+            <div class="u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-5">
+                <img class="u-image u-image-default u-image-5" src="{%static 'main/img/photo_2023-12-05_14-23-33.jpg'%}" alt="" data-image-width="1280" data-image-height="1280">
+                <p class="u-small-text u-text u-text-variant u-text-7">Грибков Матвей наш разработчик</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{%endblock%}
