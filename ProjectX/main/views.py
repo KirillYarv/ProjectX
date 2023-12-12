@@ -1,20 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+
+from .models import Teacher, TeacherProfile
+from .auth import create_user
+from .form import AuthForm, TeacherForm, AuthTeacherForm
+
 
 # Create your views here.
 def index(request):
-    data = {
-        'title': 'Главная',
-        'values': ['Book 1', 'Book 2', 'Book 3']
-    }
-    return render(request,'main/index.html',data)
+    return render(request,'main/index.html')
 
 def about(request):
     return render(request,'main/about.html')
 def login(request):
-    return render(request, 'registration/login.html')
+    a = TeacherProfile.objects.all()
+    data = {
+        'a': a
+    }
+    return render(request, 'registration/login.html',data)
 
 
 def logout(request):
@@ -22,8 +28,66 @@ def logout(request):
 
 @login_required
 def profile(request):
-    return render(request, 'main/profile.html')
+    a = ''
+    for i in Teacher.objects.all():
+        if request.user.id == i.user_id:
+
+            data = {
+                'a': a
+            }
+            if i.is_teacher == '0':
+                return render(request, 'main/profile_student.html', data)
+            else:
+                return render(request, 'main/profile_teacher.html', data)
+
+
+
 def auth_teacher(request):
-    return render(request, 'main/Регистрация-для-репетитора.html')
+    error = ''
+    a = ''
+    if request.method == 'POST':
+        form = AuthForm(request.POST)
+        form_education = AuthTeacherForm(request.POST)
+
+        if form.is_valid() and form_education.is_valid():
+            create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password'])
+            a = User.objects.all()
+            form_teacher = Teacher(user=a[len(a) - 1], is_teacher=1)
+            form_teacher_profile = TeacherProfile(user=a[len(a) - 1], education=form_education.cleaned_data['education'])
+
+            form_teacher.save()
+            form_teacher_profile.save()
+
+            return redirect('../../../accounts/login/')
+        else:
+            error = "Форма не верна"
+    form = AuthForm()
+    form_education = AuthTeacherForm()
+    data = {
+        'form': form,
+        'form_education': form_education,
+        'error': error
+    }
+    return render(request, 'registration/Регистрация-для-репетитора.html', data)
 def auth_student(request):
-    return render(request, 'main/Регистрация-для-обучающегося.html')
+    error = ''
+    a= ''
+    if request.method == 'POST':
+        form = AuthForm(request.POST)
+
+
+        if form.is_valid():
+            create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password'])
+            a = User.objects.all()
+            form_teacher = Teacher(user = a[len(a)-1], is_teacher = 0)
+            form_teacher.save()
+
+            return redirect('../../../accounts/login/')
+        else:
+            error = "Форма не верна"
+    form = AuthForm()
+    data = {
+        'form': form,
+        'error': error
+    }
+    return render(request, 'registration/Регистрация-для-обучающегося.html',data)

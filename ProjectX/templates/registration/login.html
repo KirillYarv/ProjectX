@@ -10,21 +10,26 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-default u-text-1">Вход</p>
         <div class="u-form u-form-1">
+
+
+
           <form method="post" action="{% url 'login' %}" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="name" name="form">
             {% csrf_token %}
             <div class="u-form-email u-form-group u-label-none">
-              <label for="email-6797" class="u-label">Email</label>
-              {{ form.username.label_tag }}<div id="email-6797" class="u-input u-input-rectangle">{{ form.username }}</div>
+              <label for="name-6797" class="u-label">Name</label>
+              <div id="name-6797" class="u-input u-input-rectangle">{{ form.username }}</div>
             </div>
 
             <div class="u-form-group u-label-none u-form-group-2">
               <label for="text-4495" class="u-label">Поле ввода</label>
 
-              {{ form.password.label_tag }}<div id ="text-4495" class="u-input u-input-rectangle">{{ form.password }}</div>
+              <div id ="text-4495" class="u-input u-input-rectangle">{{ form.password }}</div>
             </div>
 
             <div class="u-align-center u-form-group u-form-submit">
-
+            {% if form.errors %}
+              <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
               <input type="submit" value="Войти" class="u-border-none u-btn u-btn-submit u-button-style u-palette-4-dark-1 u-btn-1">
               <input type="hidden" name="next" value="{{ next }}"/>
             </div>
@@ -36,8 +41,6 @@
       </div>
     </section>
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+
 
 {% endblock %}

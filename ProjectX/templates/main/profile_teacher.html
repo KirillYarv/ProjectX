@@ -1,0 +1,12 @@
+{% extends "../main/layout.html" %}
+{%load static%}
+{% block title %}Profile{% endblock %}
+{%block css%}
+
+{%endblock%}
+{% block head %}
+    <h3>Репетитор {{request.user.username}}</h3>
+    <a href="{%url 'logout'%}">logout</a>
+
+{% endblock %}
+
