@@ -2,11 +2,43 @@
 {%load static%}
 {% block title %}Profile{% endblock %}
 {%block css%}
-
+<link rel="stylesheet" href="{%static 'main/css/profile_student.css'%}" media="screen">
 {%endblock%}
 {% block head %}
     <h3>Ученик {{request.user.username}}</h3>
-    <a href="{%url 'logout'%}">logout</a>
 
+    <section class="u-clearfix u-section-1" id="sec-d09a">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h3 class="u-text u-text-default u-text-1">Чат с репетитором</h3>
+        <h3 class="u-text u-text-default u-text-2">Наши репетиторы</h3>
+        <div class="data-layout-selected u-clearfix u-expanded-width-xs u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <div class="custom-expanded u-container-style u-grey-10 u-group u-group-1">
+                    <div class="u-container-layout u-container-layout-2">
+                      <img class="u-expanded-height-lg u-expanded-height-md u-expanded-height-sm u-expanded-height-xl u-image u-image-default u-preserve-proportions u-image-1" src="{%static 'main/img/photo_2023-11-30_17-05-49.jpg'%}" alt="" data-image-width="183" data-image-height="201">
+                      <p class="u-text u-text-3">Репетитор по математике&nbsp;<br>Лепешов Никита
+                      </p>
+                      <a href="https://nicepage.com/wordpress-website-builder" class="u-btn u-button-style u-btn-1">чат</a>
+                    </div>
+                  </div>
+                  <div class="custom-expanded u-container-style u-grey-10 u-group u-group-2">
+                    <div class="u-container-layout u-container-layout-3">
+                      <img class="u-expanded-height-lg u-expanded-height-md u-expanded-height-sm u-expanded-height-xl u-image u-image-default u-preserve-proportions u-image-2" src="{%static 'main/img/photo_2023-11-30_17-05-23.jpg'%}" alt="" data-image-width="210" data-image-height="235">
+                      <p class="u-text u-text-4">Репетитор по математике Дронов Владимир</p>
+                      <a href="https://nicepage.com/wordpress-website-builder" class="u-btn u-button-style u-btn-2">чат</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <a href="{%url 'logout'%}">logout</a>
 {% endblock %}
 

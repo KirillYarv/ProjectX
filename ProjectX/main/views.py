@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -6,7 +7,7 @@ from django.contrib.auth.models import User
 
 from .models import Teacher, TeacherProfile
 from .auth import create_user
-from .form import AuthForm, TeacherForm, AuthTeacherForm
+from .form import AuthForm, TeacherForm, AuthTeacherForm, LoginForm
 
 
 # Create your views here.
@@ -16,10 +17,10 @@ def index(request):
 def about(request):
     return render(request,'main/about.html')
 def login(request):
-    a = TeacherProfile.objects.all()
-    data = {
-        'a': a
-    }
+
+    form = LoginForm()
+
+    data = {'form', form}
     return render(request, 'registration/login.html',data)
 
 
@@ -74,8 +75,6 @@ def auth_student(request):
     a= ''
     if request.method == 'POST':
         form = AuthForm(request.POST)
-
-
         if form.is_valid():
             create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password'])
             a = User.objects.all()
