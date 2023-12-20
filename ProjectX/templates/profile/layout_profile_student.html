@@ -1,0 +1,49 @@
+{% extends "../main/layout.html" %}
+{%load static%}
+{% block title %}Profile{% endblock %}
+{%block css%}
+<link rel="stylesheet" href="{%static 'main/css/profile_student.css'%}" media="screen">
+{%endblock%}
+{% block head %}
+
+    <section class="u-clearfix u-custom-color-2 u-section-1" id="sec-c2d0">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-text u-text-default u-text-1">Ученик {{username}}</p>
+        <div class="data-layout-selected u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <p class="u-text u-text-default u-text-2">Наши репетиторы</p>
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-valign-top u-container-layout-1">
+                  {%for i in teachers%}
+                  <div class="custom-expanded u-container-style u-grey-10 u-group u-group-1">
+                    <div class="u-container-layout u-container-layout-2">
+                      <img class="u-expanded-height u-image u-image-default u-preserve-proportions u-image-1" src="{%static 'main/img/avatar.png'%}" alt="" data-image-width="183" data-image-height="201">
+                      <p class="u-text u-text-3">Репетитор по математике<br>{{i.username}}
+                      </p>
+                      <form method="post" action="{%url 'chat'%}" name="form">
+                        {% csrf_token %}
+                        <input type="submit" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-1" value="чат">
+                        <input type="hidden" name="talker" value="{{i.username}}">
+                      </form>
+                    </div>
+                  </div>
+                  {%endfor%}
+
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-radius-14 u-shape-round u-size-30 u-layout-cell-2">
+                <div class="u-border-2 u-border-grey-75 u-container-layout u-container-layout-4">
+                   {%block chat%}
+                    {%endblock%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="{%url 'logout'%}">logout</a>
+    </section>
+
+{% endblock %}
+

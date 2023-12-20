@@ -1,0 +1,43 @@
+{% extends "../profile/layout_profile_student.html" %}
+{%block css_chat%}
+
+{%endblock%}
+{%block chat%}
+<p>Чат с {{talk_username}}</p>
+<div class="scroll" style="
+
+        width: 565px;
+        height: 300px;
+        overflow: auto;
+        text-align: justify;
+        padding: 20px;">
+
+    <div class="scroll">
+         {%for i in text%}
+            {%if i.username == username%}
+                <p style=" text-align: right;">{{i.username}}:</p>
+                <p style=" text-align: right;">{{i.text}}</p>
+            {%else%}
+                <p>{{i.username}}:</p>
+                <p>{{i.text}}</p>
+            {%endif%}
+
+        {%endfor%}
+    </div>
+    </div>
+     <form method="post" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="name" name="form">
+            {% csrf_token %}
+
+            <div class="u-form-group u-label-none u-form-group-2">
+              <label for="text-4495" class="u-label">Поле ввода</label>
+              {{ form.text }}
+            </div>
+
+            <div class="u-align-center u-form-group u-form-submit">
+              <input type="submit" value="Отправить" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-3">
+              <input type="hidden" name="next" value="{{ next }}"/>
+            </div>
+
+          </form>
+
+{%endblock%}

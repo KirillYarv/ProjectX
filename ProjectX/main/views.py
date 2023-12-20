@@ -20,28 +20,12 @@ def login(request):
 
     form = LoginForm()
 
-    data = {'form', form}
+    data = {'form': form}
     return render(request, 'registration/login.html',data)
 
 
 def logout(request):
     return render(request, 'registration/logged_out.html')
-
-@login_required
-def profile(request):
-    a = ''
-    for i in Teacher.objects.all():
-        if request.user.id == i.user_id:
-
-            data = {
-                'a': a
-            }
-            if i.is_teacher == '0':
-                return render(request, 'main/profile_student.html', data)
-            else:
-                return render(request, 'main/profile_teacher.html', data)
-
-
 
 def auth_teacher(request):
     error = ''
